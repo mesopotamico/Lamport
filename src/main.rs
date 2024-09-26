@@ -1,6 +1,9 @@
 use std::sync::{Arc, Mutex};
 mod quick_sort;
 mod rng_array;
+mod thread_assign;
+
+use thread_assign::thread_assign;
 use quick_sort::quick_sort;
 use rng_array::rng_array;
 use std::sync::mpsc;
@@ -11,18 +14,16 @@ fn main() {
 
 
     let init2: usize = 0;
-    let size: usize = 10;
-    let threads_number: usize = 3; 
+    let size: usize = 100000;
+    let threads_number: usize = 5; 
 
-    let mut disorder = rng_array(size);
+    let disorder = rng_array(size);
     println!("{:?}", disorder);
 
-    let mut mega_vec = Arc::new(Mutex::new(thread_assign(disorder, threads_number)));
+    let mega_vec = Arc::new(Mutex::new(thread_assign(disorder, threads_number)));
     let mut handles = vec![];
 
-
     //quick_sort(&mut mega_vec[0],0,3);
-
     //println!("First sorted {:?}", mega_vec[0]);
 
 
@@ -45,28 +46,6 @@ fn main() {
     for fila in &*data{
         println!("Ordered -> {:?}", fila);
     }
-
-}
-
-fn thread_assign(vector: Vec<i32>, threads: usize) -> Vec<Vec<i32>> {
-    //scores.insert(1,2);
-    let heap: usize = vector.len();
- 
-    let mut thread_assign = Vec::new();
-    for _ in 0..threads {
-        thread_assign.push(Vec::new())
-    }
-
-    let mut x: usize = 0;
-    for i in 0..heap {
-        if x == threads{
-            x = 0;
-        }
-        thread_assign[x].push(vector[i]);
-        x = x+1;
-    }
-
-    thread_assign
 
 }
 

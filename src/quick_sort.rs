@@ -24,7 +24,7 @@ pub fn quick_sort(mut vector: &mut Vec<i32>, start:usize , end: usize) {
         let right_pos = place_pivot(&mut vector, start, end);
         if right_pos != 0 {
             quick_sort(&mut vector, start, right_pos - 1);
-        } 
+        }
         quick_sort(&mut vector,right_pos + 1, end);
         
     }

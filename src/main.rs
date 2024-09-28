@@ -14,7 +14,7 @@ fn main() {
 
 
     let init2: usize = 0;
-    let size: usize = 100000;
+    let size: usize = 1000;
     let threads_number: usize = 5; 
 
     let disorder = rng_array(size);
@@ -27,7 +27,7 @@ fn main() {
     //println!("First sorted {:?}", mega_vec[0]);
 
 
-    for id in 1..threads_number {
+    for id in 0..threads_number {
         let mega_vec_clone = Arc::clone(&mega_vec);
         let handle = thread::spawn(move || {
             let mut mega_vec_lock = mega_vec_clone.lock().unwrap();

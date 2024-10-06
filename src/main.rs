@@ -10,20 +10,25 @@ use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
 
+
 fn main() {
 
 
     let init2: usize = 0;
-    let size: usize = 1000;
-    let threads_number: usize = 5; 
+    let size: usize = 10;
+    let threads_number: usize = 1; 
 
-    let disorder = rng_array(size);
-    println!("{:?}", disorder);
+    let mut unorder = rng_array(size);
+    println!("Disorder normal {:?}", unorder);
+
+    let mut disorder = rng_array(size);
+    println!("Disorder threads {:?}", disorder);
 
     let mega_vec = Arc::new(Mutex::new(thread_assign(disorder, threads_number)));
     let mut handles = vec![];
 
-    //quick_sort(&mut mega_vec[0],0,3);
+    quick_sort(&mut unorder,0, 9);
+    println!("Sorted normal {:?}", unorder);
     //println!("First sorted {:?}", mega_vec[0]);
 
 
@@ -44,7 +49,7 @@ fn main() {
     let data = mega_vec.lock().unwrap();
 
     for fila in &*data{
-        println!("Ordered -> {:?}", fila);
+        println!("Ordered threads -> {:?}", fila);
     }
 
 }

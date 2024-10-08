@@ -10,8 +10,14 @@ use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
 
+// use std::io::{self, BufRead,BufReader, Write};
+// use std::net::{TcpListener, TcpStream};
 
 fn main() {
+
+    // let mut stream = TcpStream::connect("127.0.0.1:80")?;
+    // println!("Conectado al servidor en 127.0.0.1:80");
+
 
 
     let init2: usize = 0;
@@ -54,3 +60,4 @@ fn main() {
 
 }
 
+//Pass function as parameter to assign threas to a divide an conquer process

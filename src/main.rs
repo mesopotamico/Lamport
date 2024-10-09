@@ -13,6 +13,11 @@ use std::time::Duration;
 // use std::io::{self, BufRead,BufReader, Write};
 // use std::net::{TcpListener, TcpStream};
 
+enum socket {
+    source,
+    prio,
+}
+
 fn main() {
 
     // let mut stream = TcpStream::connect("127.0.0.1:80")?;
@@ -22,10 +27,8 @@ fn main() {
 
     let init2: usize = 0;
     let size: usize = 10;
-    let threads_number: usize = 1; 
+    let threads_number: usize = 5; 
 
-    let mut unorder = rng_array(size);
-    println!("Disorder normal {:?}", unorder);
 
     let mut disorder = rng_array(size);
     println!("Disorder threads {:?}", disorder);
@@ -33,8 +36,6 @@ fn main() {
     let mega_vec = Arc::new(Mutex::new(thread_assign(disorder, threads_number)));
     let mut handles = vec![];
 
-    quick_sort(&mut unorder,0, 9);
-    println!("Sorted normal {:?}", unorder);
     //println!("First sorted {:?}", mega_vec[0]);
 
 
@@ -59,5 +60,7 @@ fn main() {
     }
 
 }
+
+fn thread_distribution (bvec: Vec<Vec<i32>>,  )
 
 //Pass function as parameter to assign threas to a divide an conquer process
